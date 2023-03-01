@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "My Bookstore";
+}
+
+@model BooksViewModel
+
+<h1>Books</h1>
+<br />
+
+@* Loop through database and print out books *@
+@foreach (Book b in Model.Books)
+{
+    <h3>@b.Title</h3>
+    <ul>
+        <li>Author: @b.Author</li>
+        <li>Publisher: @b.Publisher</li>
+        <li>ISBN: @b.Isbn</li>
+        <li>Classification: @b.Classification</li>
+        <li>Category: @b.Category</li>
+        <li>Pages: @b.PageCount</li>
+        <li>Price: @b.Price</li>
+    </ul>
+
+    <br />
+}
+
+@* Print page numbers through taghelper *@
+<div page-model="@Model.PageInfo" page-action="Index"></div>
