@@ -7,12 +7,41 @@
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    @* First bootstrap element *@
+    <masthead class="masthead">
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/img/DarkAcademiaLibrary.jpg" class="d-block w-100 carousel-img" style="height: 350px; width: fit-content;" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Welcome!</h3>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="~/img/library.jpg" class="d-block w-100 carousel-img" style="height: 350px; width: fit-content;"/>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Shop for the best books!</h3>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </masthead>
+
+
     <div class="bg-dark text-white p-2">
         <span class="navbar-brand ml-2">The Best Online Book Store</span>
     </div>
     <div class="row m-1 p-1">
         <div id="categories" class="col-3">
-            Browse our lastest collection
+            <vc:category></vc:category>
         </div>
         <div class="col-9">
             @RenderBody()

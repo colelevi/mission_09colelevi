@@ -1,15 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using mission_09colelevi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace mission_09colelevi
 {
@@ -35,6 +30,14 @@ namespace mission_09colelevi
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            //razor page service
+            services.AddRazorPages();
+
+            // For sessions
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
         }
 
 
@@ -48,12 +51,30 @@ namespace mission_09colelevi
 
             // wwwroot
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("categorypage",
+                    "{category}/Page{pageNum}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                        name: "Paging",
+                        pattern: "page{pageNum}",
+                        defaults: new { Controller = "Home", action = "Index", pageNum = 1 }
+                    );
+
+                endpoints.MapControllerRoute("category",
+                    "{category}",
+                    new { Controller = "Home", action = "Index", pageNum= 1 });
+
+
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }
